@@ -2,9 +2,9 @@
 
 namespace Code95\Page\Tests;
 
+use Code95\Page\PageServiceProvider;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Orchestra\Testbench\TestCase as Orchestra;
-use Code95\Page\PageServiceProvider;
 
 class TestCase extends Orchestra
 {

@@ -3,15 +3,12 @@
 
 namespace Code95\Page\FormRequest;
 
-
 use Code95\Page\Page;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
 class CreatePageRequest extends FormRequest
 {
-
-
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -33,9 +30,7 @@ class CreatePageRequest extends FormRequest
             'translation' => 'required|in:ar,en',
             'title' => 'required|max:120',
             'body' => 'nullable',
-            'type' => ['required', Rule::in(array_keys(Page::TYPES))]
+            'type' => ['required', Rule::in(array_keys(Page::TYPES))],
         ];
     }
-
-
 }

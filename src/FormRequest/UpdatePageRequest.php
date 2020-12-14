@@ -3,13 +3,8 @@
 
 namespace Code95\Page\FormRequest;
 
-
-use Illuminate\Foundation\Http\FormRequest;
-
 class UpdatePageRequest extends CreatePageRequest
 {
-
-
     public function withValidator($validator)
     {
         $validator->after(function ($validator) {
@@ -18,6 +13,4 @@ class UpdatePageRequest extends CreatePageRequest
             }
         });
     }
-
-
 }

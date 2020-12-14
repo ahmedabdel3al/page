@@ -24,10 +24,9 @@ class Page extends Model
         2 => 'dynamic',
     ];
 
-
     public function seo()
     {
-      //  return $this->morphOne(Seo::class, 'model');
+        //  return $this->morphOne(Seo::class, 'model');
     }
 
     public function scopeActive(Builder $query)
@@ -39,6 +38,4 @@ class Page extends Model
     {
         return $query->where('slug', $slug);
     }
-
-
 }

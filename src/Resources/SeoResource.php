@@ -7,7 +7,6 @@ use Illuminate\Http\Resources\Json\JsonResource;
 
 class SeoResource extends JsonResource
 {
-
     /**
      * Transform the resource into an array.
      *
@@ -22,7 +21,7 @@ class SeoResource extends JsonResource
             'twitter' => $this->twitter,
             'description' => $this->description,
             'title' => $this->title,
-            'keywords' => $this->keywords
+            'keywords' => $this->keywords,
         ];
     }
 }

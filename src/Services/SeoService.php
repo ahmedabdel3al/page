@@ -3,7 +3,6 @@
 
 namespace Code95\Page\Services;
 
-
 use Artesaos\SEOTools\Facades\OpenGraph;
 use Artesaos\SEOTools\Facades\SEOMeta;
 use Artesaos\SEOTools\Facades\TwitterCard;
@@ -12,8 +11,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class SeoService
 {
-
-
     /**
      *
      * Create Or Update Seo tags
@@ -24,9 +21,10 @@ class SeoService
      */
     public function createOrUpdate(Model $model, array $seoAttributes)
     {
-        if (!$model->seo) {
+        if (! $model->seo) {
             return $this->create($model, $seoAttributes);
         }
+
         return $this->update($model->seo, $seoAttributes);
     }
 
@@ -43,6 +41,7 @@ class SeoService
         $seo->setTranslation('tags', config('translatable.locale'), $seoAttributes);
         $seo->model()->associate($model);
         $this->attachMedia(tap($seo)->save());
+
         return $seo;
     }
 
@@ -64,6 +63,7 @@ class SeoService
         $seo->setTranslation('tags', config('translatable.locale'), $seoAttributes);
         tap($seo)->update();
         $this->attachMedia($seo);
+
         return $seo;
     }
 
@@ -83,14 +83,16 @@ class SeoService
     public function setTitle($title)
     {
         SEOMeta::setTitle($title);
+
         return $this;
     }
 
     public function setDescription($description)
     {
-        when(!is_null($description), function () use ($description) {
+        when(! is_null($description), function () use ($description) {
             SEOMeta::setDescription($description);
         });
+
         return $this;
     }
 
@@ -98,6 +100,7 @@ class SeoService
     {
         OpenGraph::setType($type);
         TwitterCard::setType($type);
+
         return $this;
     }
 
@@ -106,18 +109,19 @@ class SeoService
         $url = $url ?: request()->url();
         OpenGraph::setUrl($url);
         TwitterCard::setUrl($url);
+
         return $this;
     }
 
     public function setCanonical($url = '')
     {
         SEOMeta::setCanonical($url ?: env('APP_URL'));
+
         return $this;
     }
 
     public function setFacebook(array $attributes)
     {
-
         when(isset($attributes['description']), function () use ($attributes) {
             OpenGraph::setDescription($attributes['description']);
         });
@@ -128,6 +132,7 @@ class SeoService
             OpenGraph::addImage($attributes['image']);
         });
         OpenGraph::setSiteName(env('APP_NAME'));
+
         return $this;
     }
 
@@ -139,6 +144,7 @@ class SeoService
         when(isset($attributes['title']), function () use ($attributes) {
             TwitterCard::setTitle($attributes['title']);
         });
+
         return $this;
     }
 
@@ -147,8 +153,7 @@ class SeoService
         when(empty($keywords), function () use ($keywords) {
             SEOMeta::addKeyword($keywords);
         });
+
         return $this;
     }
-
-
 }

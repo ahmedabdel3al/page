@@ -3,7 +3,6 @@
 namespace Code95\Page;
 
 use Illuminate\Support\ServiceProvider;
-use Code95\Page\Commands\PageCommand;
 
 class PageServiceProvider extends ServiceProvider
 {
@@ -30,13 +29,13 @@ class PageServiceProvider extends ServiceProvider
 
 
             $migrationFileName = 'create_pages_table.php';
-            if (!$this->migrationFileExists($migrationFileName)) {
+            if (! $this->migrationFileExists($migrationFileName)) {
                 $this->publishes([
                     __DIR__ . "/../database/migrations/{$migrationFileName}.stub" => database_path('migrations/' . date('Y_m_d_His', time()) . '_' . $migrationFileName),
                 ], 'migrations');
             }
             $migrationFileName = 'create_seo_table.php';
-            if (!$this->migrationFileExists($migrationFileName)) {
+            if (! $this->migrationFileExists($migrationFileName)) {
                 $this->publishes([
                     __DIR__ . "/../database/migrations/{$migrationFileName}.stub" => database_path('migrations/' . date('Y_m_d_His', time()) . '_' . $migrationFileName),
                 ], 'migrations');
@@ -44,7 +43,6 @@ class PageServiceProvider extends ServiceProvider
 
 
             $this->loadRoutesFrom(__DIR__ . '/../src/route.php');
-
         }
 
         $this->loadViewsFrom(__DIR__ . '/../resources/views', 'pages');

@@ -3,7 +3,6 @@
 
 namespace Code95\Page\Controller;
 
-
 use Code95\Page\FormRequest\CreatePageRequest;
 use Code95\Page\FormRequest\UpdatePageRequest;
 use Code95\Page\Page;
@@ -20,9 +19,7 @@ class PageController
     public function __construct(
         PageServices $admin_page_service,
         SeoService $seo_service
-
-    )
-    {
+    ) {
         $this->admin_page_service = $admin_page_service;
         $this->seo_service = $seo_service;
     }
@@ -42,7 +39,7 @@ class PageController
                     [
                         'delete_url' => '',
                     ]
-                )
+                ),
         ]);
     }
 
@@ -56,7 +53,7 @@ class PageController
     public function create(Request $request)
     {
         return view('admin.page.create', [
-            'options' => admin_create_form_options(class_basename(Page::class))
+            'options' => admin_create_form_options(class_basename(Page::class)),
         ]);
     }
 
@@ -66,17 +63,18 @@ class PageController
         $this->seo_service->createOrUpdate($page, $request->get('seo'));
 
         return response()->json([
-            'data' => $page
+            'data' => $page,
         ], 200);
     }
 
     public function edit(Request $request, Page $page)
     {
         $page = new AdminPageResource($page);
+
         return view('admin.page.edit', [
             'page' => $page,
             'options' => admin_update_form_options($page, class_basename(Page::class), [
-                'seo' => new SeoResource($page->seo)
+                'seo' => new SeoResource($page->seo),
             ]),
         ]);
     }
@@ -87,8 +85,7 @@ class PageController
         $this->seo_service->createOrUpdate($page, $request->get('seo'));
 
         return response()->json([
-            'data' => $page
+            'data' => $page,
         ], 200);
     }
-
 }

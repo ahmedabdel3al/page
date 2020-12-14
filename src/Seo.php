@@ -3,7 +3,6 @@
 
 namespace Code95\Page;
 
-
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
 use Spatie\MediaLibrary\HasMedia;
@@ -12,8 +11,8 @@ use Spatie\Translatable\HasTranslations;
 
 class Seo extends Model implements HasMedia
 {
-
-    use HasTranslations, InteractsWithMedia;
+    use HasTranslations;
+    use InteractsWithMedia;
 
     protected $fillable = ['tags'];
     public $translatable = ['tags'];
@@ -21,28 +20,26 @@ class Seo extends Model implements HasMedia
 
     protected $casts = ['tags' => 'array'];
 
-
     public function getFacebookAttribute()
     {
         $facebookAttribute = $this->tags['facebook'];
         $facebookAttribute['image'] = $this->facebook_image;
+
         return $facebookAttribute;
     }
 
     public function getTwitterAttribute()
     {
-
         $twitterAttribute = $this->tags['twitter'];
         $twitterAttribute['image'] = $this->twitter_image;
+
         return $twitterAttribute;
     }
-
 
     public function model(): MorphTo
     {
         return $this->morphTo();
     }
-
 
     public function getFacebookImageAttribute()
     {
@@ -71,7 +68,6 @@ class Seo extends Model implements HasMedia
 
     public function addMediaToCollection($file, ?string $collectionName = '')
     {
-
         if (request()->hasFile($file)) {
             //remove image  from storage
             //set new image again
@@ -88,6 +84,4 @@ class Seo extends Model implements HasMedia
 
         return env('APP_URL') . $url;
     }
-
-
 }
