@@ -1,0 +1,56 @@
+{
+    "name": "code95/pages",
+    "description": "",
+    "keywords": [
+        "code95",
+        "pages"
+    ],
+    "homepage": "https://github.com/code95/pages",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Ahmed Abdelaal",
+            "email": "ahmed.abdelaal@gmail.com",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php": "^7.4|^8.0",
+        "artesaos/seotools": "^0.19.1",
+        "illuminate/contracts": "^8.0",
+        "spatie/laravel-medialibrary": "^9.0.0",
+        "spatie/laravel-translatable": "^4.6"
+    },
+    "require-dev": {
+        "orchestra/testbench": "^6.0",
+        "phpunit/phpunit": "^9.3"
+    },
+    "autoload": {
+        "psr-4": {
+            "Code95\\Page\\": "src",
+            "Code95\\Page\\Database\\Factories\\": "database/factories"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Code95\\Page\\Tests\\": "tests"
+        }
+    },
+    "scripts": {
+        "psalm": "vendor/bin/psalm",
+        "test": "vendor/bin/phpunit --colors=always",
+        "test-coverage": "vendor/bin/phpunit --coverage-html coverage"
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Code95\\Page\\PageServiceProvider"
+            ]
+        }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}
