@@ -10,16 +10,8 @@ class CreatePagesTable extends Migration
     {
         Schema::create('seo', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->json('title');
-            $table->string('slug')->unique();
-            $table->json('body')->nullable();
-            $table->unsignedTinyInteger('type')->comment("{
-                1: static,
-                2: dynamic,
-            }")->default(2);
-            $table->boolean('is_active')->default(true);
-            $table->boolean('is_permanent')->default(false);
-
+            $table->nullableMorphs('model');
+            $table->json('tags')->nullable();
             $table->timestamps();
         });
     }

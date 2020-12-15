@@ -3,16 +3,16 @@
 
 namespace Code95\Page;
 
+use App\Traits\HasTranslations;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
-use Spatie\Translatable\HasTranslations;
 
 class Seo extends Model implements HasMedia
 {
-    use HasTranslations;
-    use InteractsWithMedia;
+    use HasTranslations, InteractsWithMedia;
+
 
     protected $fillable = ['tags'];
     public $translatable = ['tags'];

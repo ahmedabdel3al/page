@@ -2,9 +2,9 @@
 
 namespace Code95\Page;
 
+use App\Traits\HasTranslations;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
-use Spatie\Translatable\HasTranslations;
 
 class Page extends Model
 {
@@ -26,7 +26,7 @@ class Page extends Model
 
     public function seo()
     {
-        //  return $this->morphOne(Seo::class, 'model');
+        return $this->morphOne(Seo::class, 'model');
     }
 
     public function scopeActive(Builder $query)

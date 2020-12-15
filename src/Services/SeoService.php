@@ -21,7 +21,7 @@ class SeoService
      */
     public function createOrUpdate(Model $model, array $seoAttributes)
     {
-        if (! $model->seo) {
+        if (!$model->seo) {
             return $this->create($model, $seoAttributes);
         }
 
@@ -38,7 +38,7 @@ class SeoService
     public function create(Model $model, $seoAttributes)
     {
         $seo = new Seo();
-        $seo->setTranslation('tags', config('translatable.locale'), $seoAttributes);
+        $seo->setTranslation('tags', request()->get('translation', config('translatable.locale')), $seoAttributes);
         $seo->model()->associate($model);
         $this->attachMedia(tap($seo)->save());
 
@@ -60,7 +60,7 @@ class SeoService
      */
     public function update(Seo $seo, $seoAttributes)
     {
-        $seo->setTranslation('tags', config('translatable.locale'), $seoAttributes);
+        $seo->setTranslation('tags', request()->get('translation', config('translatable.locale')), $seoAttributes);
         tap($seo)->update();
         $this->attachMedia($seo);
 
@@ -89,7 +89,7 @@ class SeoService
 
     public function setDescription($description)
     {
-        when(! is_null($description), function () use ($description) {
+        when(!is_null($description), function () use ($description) {
             SEOMeta::setDescription($description);
         });
 

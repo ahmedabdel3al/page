@@ -29,6 +29,7 @@ class CreatePageRequest extends FormRequest
         return [
             'translation' => 'required|in:ar,en',
             'title' => 'required|max:120',
+            'slug' => 'required|unique:pages',
             'body' => 'nullable',
             'type' => ['required', Rule::in(array_keys(Page::TYPES))],
         ];

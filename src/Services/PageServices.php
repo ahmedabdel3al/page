@@ -11,9 +11,10 @@ class PageServices
     public function create(Request $request)
     {
         $page = new Page();
-        $page->title = $request->title;
+        $page->setTranslation('title', $request->get('translation', config('translatable.locale')), $request->title);
         $page->body = $request->body;
-        $page->type = Page::TYPES[$request->type];
+        $page->type = $request->type;
+        $page->slug = $request->slug;
         $page->save();
 
         return $page;
@@ -21,11 +22,12 @@ class PageServices
 
     public function update(Request $request, Page $page)
     {
-        $page->update([
-            'title' => $request->title,
-            'body' => $request->body,
-            'type' => $request->type,
-        ]);
+
+        $page->body = $request->body;
+        $page->type = $request->type;
+        $page->slug = $request->slug;
+        $page->setTranslation('title', $request->get('translation', config('translatable.locale')), $request->title);
+        $page->save();
 
         return $page;
     }
