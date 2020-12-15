@@ -11,7 +11,8 @@ use Spatie\MediaLibrary\InteractsWithMedia;
 
 class Seo extends Model implements HasMedia
 {
-    use HasTranslations, InteractsWithMedia;
+    use HasTranslations;
+    use InteractsWithMedia;
 
 
     protected $fillable = ['tags'];

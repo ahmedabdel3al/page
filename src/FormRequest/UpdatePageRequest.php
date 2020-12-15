@@ -5,8 +5,6 @@ namespace Code95\Page\FormRequest;
 
 class UpdatePageRequest extends CreatePageRequest
 {
-
-
     public function rules()
     {
         array_merge(
@@ -14,6 +12,7 @@ class UpdatePageRequest extends CreatePageRequest
             ['slug' => 'required|unique:pages,slug,' . $this->page->id]
         );
     }
+
     public function withValidator($validator)
     {
         $validator->after(function ($validator) {

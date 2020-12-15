@@ -21,7 +21,7 @@ class SeoService
      */
     public function createOrUpdate(Model $model, array $seoAttributes)
     {
-        if (!$model->seo) {
+        if (! $model->seo) {
             return $this->create($model, $seoAttributes);
         }
 
@@ -89,7 +89,7 @@ class SeoService
 
     public function setDescription($description)
     {
-        when(!is_null($description), function () use ($description) {
+        when(! is_null($description), function () use ($description) {
             SEOMeta::setDescription($description);
         });
 

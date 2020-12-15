@@ -22,7 +22,6 @@ class PageServices
 
     public function update(Request $request, Page $page)
     {
-
         $page->body = $request->body;
         $page->type = $request->type;
         $page->slug = $request->slug;

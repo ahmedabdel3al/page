@@ -6,5 +6,4 @@
  */
 
 
-use Code95\Page\Controller\PageController;
 use Illuminate\Support\Facades\Route;
